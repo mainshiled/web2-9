@@ -14,17 +14,28 @@ html, body { height: 100%; margin; 0; padding: 0; }
  
 <script type="text/javascript">
 function initMap() {
+ geocoder = new google.maps.Geocoder();
+ geocoder.geocode({
+  'address':'神奈川県厚木市飯山1583'
+ }, function(results, status){
+  if(status === google.maps.GeocoderStatus.OK){
+   var location = results[0].geometry.location;
 var map =new google.maps.Map(document.getElementById('map'),{
-center:{lat:35.462906, lng:139.330869},
+center: location,
 mapTypeId: google.maps.MapTypeId.TERRAIN,
 zoom:16
 });
 var infoWindow = new google.maps.InfoWindow({
  content: '東京工芸大学',
- position: {lat:35.462906, lng:139.330869},
+ position: location,
  pixelOffset: new google.maps.Size(0, -50)
  });
  infoWindow.setMap(map);
+ 
+ var marker = new google.maps.Marker({
+  position: location,
+  map: map
+ });
 }
 </script>
 
